@@ -20,7 +20,8 @@ final_questions = [ ]
 def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
     try:
         value = ""
-        
+        print(endpoint_splitter, blob_index_runner)
+
         while blob_index_runner < len(blob)-1:
             
             global splitterB_index_runner 
@@ -29,10 +30,11 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
             value = value + blob[blob_index_runner]
             
             lhs_letter = blob[blob_index_runner] 
-            rhs_letter = endpoint_splitter[0]
+            rhs_letter = endpoint_splitter[splitterB_index_runner]
             
             if lhs_letter == rhs_letter:
                 second_marker = lhs_letter
+
                 while True:
 
                     blob_index_runner += 1
@@ -40,11 +42,17 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
                     splitterB_index_runner+=1
                     rhs_letter = endpoint_splitter[splitterB_index_runner]
                     second_marker += lhs_letter 
-
+                    
+                    if lhs_letter != rhs_letter:
+                        value += second_marker
+                        break
+                    
                     if second_marker == endpoint_splitter:
-                        rahul_splitter_a(blob, splitterA, blob_index_runner )                        
+                        final_questions.append(value)
+                        rahul_splitter_a(blob, splitterA, splitterB )                        
             blob_index_runner += 1  
             value = value + blob[blob_index_runner]
+        final_questions.append(value)
     except Exception as e:
         print(e)
         raise 
@@ -52,6 +60,7 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
 
 def rahul_splitter_a(blob, splitterA, splitterB):
     try:
+        print(splitterA, splitterB)
         output_value = ""
 
         assert len(splitterA)>0
@@ -86,45 +95,12 @@ def rahul_splitter_a(blob, splitterA, splitterB):
                         break
                     
                     if marker == splitterA:
-
+                        print(splitterB, blob_index_runner+1)
                         rahul_splitter_b(blob, splitterB, blob_index_runner+1)
 
             blob_index_runner += 1  
             output_value = output_value + blob[blob_index_runner]
 
-
-
-                    
-
-        # length_of_marker = len(splitterA)
-        # questions = []
-        # pointer = 0
-        # while length_of_marker<len(blob):
-        #     marker = ""
-        #     for i in range(pointer, length_of_marker):
-        #         marker = marker + blob[i]
-
-        #     pointer = pointer+9
-        #     length_of_marker = length_of_marker + 9
-        #     print(pointer, length_of_marker)
-        #     if marker == splitterA:
-        #         print(marker)
-        #         end_marker = ""
-        #         while end_marker != splitterB:
-        #             for i in range(pointer, length_of_marker):
-        #                 end_marker = end_marker + blob[pointer]
-        #             if end_marker == splitterB:
-        #                 print(end_marker)
-        #             else:
-                        # print(end_marker)
-        # print(length_of_marker)
-        # while pointer<len(blob):
-        #     temp_marker = ""
-        #     for a_letter_ in (0,length_of_marker):
-        #         new_letter = blob[a_letter_]
-        #         temp_marker = temp_marker + new_letter
-        #     print(temp_marker)
-        # return questions
     except Exception as e:
         print(e)
         raise 
