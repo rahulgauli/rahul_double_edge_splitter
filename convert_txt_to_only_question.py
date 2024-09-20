@@ -9,18 +9,23 @@
 ### it keeps on running from one place to the other to collectively and recursively get question only 
 
 
-global final_questions 
-final_questions = [ ]
+global first_values  
+first_values = [ ]
 
 global blob_index_runner 
 blob_index_runner = 0
 
+global second_values
+second_values = [ ]
+
+global first_second_mapped_json 
+first_second_mapped_json = { }
 
 
 def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
     try:
         value = ""
-        print(endpoint_splitter, blob_index_runner)
+        # print(endpoint_splitter, blob_index_runner)
 
         while blob_index_runner < len(blob)-1:
             
@@ -48,13 +53,14 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
                         break
                     
                     if second_marker == endpoint_splitter:
-                        final_questions.append(value)
+                        first_values.append(value)
                         response = rahul_splitter_a(blob, splitterA, splitterB , blob_index_runner=blob_index_runner)      
                         if response is None:
-                            return                  
+                            return
+                 
             blob_index_runner += 1  
             value = value + blob[blob_index_runner]
-        final_questions.append(value)
+        first_values.append(value)
         return
     except Exception as e:
         print(e)
@@ -63,7 +69,8 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
 
 def rahul_splitter_a(blob, splitterA, splitterB, blob_index_runner=blob_index_runner):
     try:
-        print(splitterA, splitterB)
+        # print(f"we are in the First slice {splitterA}")
+
         output_value = ""
 
         assert len(splitterA)>0
@@ -97,12 +104,14 @@ def rahul_splitter_a(blob, splitterA, splitterB, blob_index_runner=blob_index_ru
                         break
                     
                     if marker == splitterA:
-                        print(splitterB, blob_index_runner+1)
+                        # print(splitterB, blob_index_runner+1)
+                        second_values.append(output_value)
                         response =rahul_splitter_b(blob, splitterB, blob_index_runner+1)
                         if response is None:
                             return
             blob_index_runner += 1  
             output_value = output_value + blob[blob_index_runner]
+        second_values.append(output_value)
         return
     except Exception as e:
         print(e)
@@ -114,4 +123,10 @@ splitterB = "Solution:"
 with open("questions.txt", "r+") as f:
     blob = f.read()
     rahul_splitter_a(blob, splitterA, splitterB)
-    print(len(final_questions))
+    for a_equestion_ in first_values:
+        print(a_equestion_)
+
+    for a_solution in second_values:
+        print(a_solution)
+    print(len(second_values))
+    print(len(first_values))
