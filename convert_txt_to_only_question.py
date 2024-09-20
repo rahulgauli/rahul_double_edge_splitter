@@ -10,10 +10,10 @@
 
 
 global final_questions 
-
 final_questions = [ ]
 
-
+global blob_index_runner 
+blob_index_runner = 0
 
 
 
@@ -49,7 +49,7 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
                     
                     if second_marker == endpoint_splitter:
                         final_questions.append(value)
-                        response = rahul_splitter_a(blob, splitterA, splitterB )      
+                        response = rahul_splitter_a(blob, splitterA, splitterB , blob_index_runner=blob_index_runner)      
                         if response is None:
                             return                  
             blob_index_runner += 1  
@@ -61,7 +61,7 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
         raise 
 
 
-def rahul_splitter_a(blob, splitterA, splitterB):
+def rahul_splitter_a(blob, splitterA, splitterB, blob_index_runner=blob_index_runner):
     try:
         print(splitterA, splitterB)
         output_value = ""
@@ -69,8 +69,7 @@ def rahul_splitter_a(blob, splitterA, splitterB):
         assert len(splitterA)>0
         assert len(blob)>0
 
-        global blob_index_runner 
-        blob_index_runner = 0
+        
          
         # output_value = output_value + blob[blob_index_runner]
 
@@ -115,3 +114,4 @@ splitterB = "Solution:"
 with open("questions.txt", "r+") as f:
     blob = f.read()
     rahul_splitter_a(blob, splitterA, splitterB)
+    print(len(final_questions))
