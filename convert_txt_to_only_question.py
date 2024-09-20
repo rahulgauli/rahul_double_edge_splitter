@@ -6,6 +6,7 @@
 # global final_questions
 
 ### Calling this the run rabbit algorithm
+### it keeps on running from one place to the other to collectively and recursively get question only 
 
 
 global final_questions 
