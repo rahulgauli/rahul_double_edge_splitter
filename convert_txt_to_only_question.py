@@ -49,10 +49,13 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
                     
                     if second_marker == endpoint_splitter:
                         final_questions.append(value)
-                        rahul_splitter_a(blob, splitterA, splitterB )                        
+                        response = rahul_splitter_a(blob, splitterA, splitterB )      
+                        if response is None:
+                            return                  
             blob_index_runner += 1  
             value = value + blob[blob_index_runner]
         final_questions.append(value)
+        return
     except Exception as e:
         print(e)
         raise 
@@ -96,11 +99,12 @@ def rahul_splitter_a(blob, splitterA, splitterB):
                     
                     if marker == splitterA:
                         print(splitterB, blob_index_runner+1)
-                        rahul_splitter_b(blob, splitterB, blob_index_runner+1)
-
+                        response =rahul_splitter_b(blob, splitterB, blob_index_runner+1)
+                        if response is None:
+                            return
             blob_index_runner += 1  
             output_value = output_value + blob[blob_index_runner]
-
+        return
     except Exception as e:
         print(e)
         raise 
