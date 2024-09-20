@@ -57,7 +57,6 @@ def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
                         response = rahul_splitter_a(blob, splitterA, splitterB , blob_index_runner=blob_index_runner)      
                         if response is None:
                             return
-                 
             blob_index_runner += 1  
             value = value + blob[blob_index_runner]
         first_values.append(value)
@@ -75,8 +74,6 @@ def rahul_splitter_a(blob, splitterA, splitterB, blob_index_runner=blob_index_ru
 
         assert len(splitterA)>0
         assert len(blob)>0
-
-        
          
         # output_value = output_value + blob[blob_index_runner]
 
@@ -87,8 +84,6 @@ def rahul_splitter_a(blob, splitterA, splitterB, blob_index_runner=blob_index_ru
 
             lhs_letter = blob[blob_index_runner]
             rhs_letter = splitterA[splitterA_index_runner]
-            
-
             if lhs_letter == rhs_letter:
                 marker = lhs_letter
                 while True:
