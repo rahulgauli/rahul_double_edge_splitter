@@ -17,27 +17,34 @@ final_questions = [ ]
 
 
 
-def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner, splitter_index_runner):
+def rahul_splitter_b(blob, endpoint_splitter, blob_index_runner):
     try:
         value = ""
         
         while blob_index_runner < len(blob)-1:
+            
+            global splitterB_index_runner 
+            splitterB_index_runner = 0 
+
             value = value + blob[blob_index_runner]
+            
             lhs_letter = blob[blob_index_runner] 
-            rhs_letter = endpoint_splitter[splitter_index_runner]
+            rhs_letter = endpoint_splitter[0]
+            
             if lhs_letter == rhs_letter:
                 second_marker = lhs_letter
                 while True:
 
                     blob_index_runner += 1
                     lhs_letter =blob[blob_index_runner]
-                    splitter_index_runner+=1
-                    rhs_letter = endpoint_splitter[splitter_index_runner]
+                    splitterB_index_runner+=1
+                    rhs_letter = endpoint_splitter[splitterB_index_runner]
                     second_marker += lhs_letter 
 
                     if second_marker == endpoint_splitter:
                         rahul_splitter_a(blob, splitterA, blob_index_runner )                        
-
+            blob_index_runner += 1  
+            value = value + blob[blob_index_runner]
     except Exception as e:
         print(e)
         raise 
